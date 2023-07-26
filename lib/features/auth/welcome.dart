@@ -3,23 +3,21 @@ import 'package:express_app/core/resources/manager_strings.dart';
 import 'package:express_app/core/widget/main_button.dart';
 import 'package:express_app/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import '../../core/resources/manager_assets.dart';
 import '../../core/resources/manager_color.dart';
 import '../../core/resources/manager_fonts.dart';
 
-class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
 
-  @override
-  State<WelcomeScreen> createState() => _WelcomeScreenState();
-}
+class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen({super.key});
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(ManagerAssets.background),
           ),
@@ -32,7 +30,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               style: TextStyle(
                   fontSize: ManagerFontSize.s30, color: ManagerColor.oliveDrab),
             ),
-            Text(
+           const  Text(
               ManagerStrings.thanks,
               textAlign: TextAlign.center,
             ),
@@ -46,9 +44,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ManagerStrings.home,
                   ManagerWidth.w130,
                   () {
-                    print('clicked ');
-                    Navigator.pushReplacementNamed(
-                        context, Routes.bottomNavigationView);
+                    print('just for test ');
+                    Get.toNamed( Routes.bottomNavigationView);
                   },
                 ),
               )

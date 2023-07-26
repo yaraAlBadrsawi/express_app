@@ -4,20 +4,15 @@ import 'package:express_app/core/widget/main_button.dart';
 import 'package:express_app/core/widget/text_field.dart';
 import 'package:express_app/features/auth/widget/auth_box.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../../core/resources/manager_assets.dart';
-import '../../core/resources/manager_color.dart';
-import '../../core/resources/manager_sizes.dart';
-import '../../core/widget/raduis_white_box.dart';
+import '../../../core/resources/manager_assets.dart';
+import '../../../core/resources/manager_color.dart';
+import '../../../core/resources/manager_sizes.dart';
+import '../../../core/widget/raduis_white_box.dart';
+import '../controller/edit_profile_controller.dart';
 
-class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({Key? key}) : super(key: key);
-
-  @override
-  State<EditProfileScreen> createState() => _EditProfileScreenState();
-}
-
-class _EditProfileScreenState extends State<EditProfileScreen> {
+class EditProfileScreen extends GetView<EditeProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,22 +90,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           fontWeight: ManagerFontWeight.bold),
                     ),
                   ),
-                  TextFieldWidget(
-                      ManagerStrings.userName, ManagerWidth.w8, Icons.person),
+                  TextFieldWidget(controller.name, ManagerStrings.userName,
+                      ManagerWidth.w8, Icons.person),
                   SizedBox(
                     height: ManagerHeight.h16,
                   ),
-                  TextFieldWidget(
-                      ManagerStrings.email, ManagerWidth.w8, Icons.email),
+                  TextFieldWidget(controller.email, ManagerStrings.email,
+                      ManagerWidth.w8, Icons.email),
                   SizedBox(
                     height: ManagerHeight.h16,
                   ),
-                  TextFieldWidget(
-                      ManagerStrings.phone, ManagerWidth.w8, Icons.phone),
+                  TextFieldWidget(controller.phone, ManagerStrings.phone,
+                      ManagerWidth.w8, Icons.phone),
                   SizedBox(
                     height: ManagerHeight.h80,
                   ),
-                  MainButton(ManagerStrings.save, ManagerWidth.w150, () => null)
+                  MainButton(ManagerStrings.save, ManagerWidth.w150,
+                      () => controller.editeProfileInfo())
                 ],
               ),
             ),

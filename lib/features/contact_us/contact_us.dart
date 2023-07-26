@@ -6,25 +6,31 @@ import 'package:express_app/core/resources/manager_strings.dart';
 import 'package:express_app/core/widget/custom_app_bar.dart';
 import 'package:express_app/core/widget/main_button.dart';
 import 'package:express_app/core/widget/text_field.dart';
+import 'package:express_app/features/contact_us/widget/contact_us.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:iconly/iconly.dart';
 
 import '../../core/widget/raduis_white_box.dart';
-import '../auth/widget/auth_box.dart';
 
-class ContactUsScreen extends StatefulWidget {
-  const ContactUsScreen({Key? key}) : super(key: key);
+class ContactUsScreen extends StatelessWidget {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _suggestController = TextEditingController();
+  final TextEditingController _messageController = TextEditingController();
 
-  @override
-  State<ContactUsScreen> createState() => _ContactUsScreenState();
-}
-
-class _ContactUsScreenState extends State<ContactUsScreen> {
+  ContactUsScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(ManagerStrings.contactUse),
+      appBar: CustomAppBar(ManagerStrings.contactUs, Icons.arrow_back_ios, () {
+        Get.back();
+
+        // Navigator.pop(context);
+      }),
       body: SingleChildScrollView(
         child: Container(
           decoration: const BoxDecoration(
@@ -96,32 +102,39 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                               color: ManagerColor.oliveDrab),
                         ),
                       ),
-                      TextFieldWidget(
-                          ManagerStrings.name, ManagerWidth.w16, Icons.person),
+                      TextFieldWidget(_nameController, ManagerStrings.name,
+                          ManagerWidth.w16, Icons.person),
+                      SizedBox(
+                        height: ManagerHeight.h8,
+                      ),
+                      TextFieldWidget(_emailController, ManagerStrings.email,
+                          ManagerWidth.w16, Icons.email),
+                      SizedBox(
+                        height: ManagerHeight.h8,
+                      ),
+                      TextFieldWidget(_phoneController, ManagerStrings.phone,
+                          ManagerWidth.w16, Icons.phone),
                       SizedBox(
                         height: ManagerHeight.h8,
                       ),
                       TextFieldWidget(
-                          ManagerStrings.email, ManagerWidth.w16, Icons.email),
+                          _suggestController,
+                          ManagerStrings.suggestion,
+                          ManagerWidth.w16,
+                          Icons.settings_suggest),
                       SizedBox(
                         height: ManagerHeight.h8,
                       ),
                       TextFieldWidget(
-                          ManagerStrings.phone, ManagerWidth.w16, Icons.phone),
-                      SizedBox(
-                        height: ManagerHeight.h8,
-                      ),
-                      TextFieldWidget(ManagerStrings.suggestion,
-                          ManagerWidth.w16, Icons.settings_suggest),
-                      SizedBox(
-                        height: ManagerHeight.h8,
-                      ),
-                      TextFieldWidget(ManagerStrings.name, ManagerWidth.w16,
+                          _nameController, //TO DO: be aware her
+                          ManagerStrings.name,
+                          ManagerWidth.w16,
                           Icons.person_2_outlined),
                       SizedBox(
                         height: ManagerHeight.h8,
                       ),
                       TextFieldWidget(
+                        _messageController,
                         ManagerStrings.message,
                         ManagerWidth.w16,
                         Icons.message_sharp,
@@ -138,31 +151,6 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class ContactInfo extends StatelessWidget {
-  final String title;
-  final IconData icon;
-  const ContactInfo(this.title, this.icon, {Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(ManagerWidth.w10),
-      child: Row(
-        children: [
-          Icon(
-            icon,
-            color: ManagerColor.oliveDrab,
-          ),
-          SizedBox(
-            width: ManagerWidth.w5,
-          ),
-          Text(title)
-        ],
       ),
     );
   }

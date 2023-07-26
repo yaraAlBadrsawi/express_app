@@ -9,6 +9,8 @@ class ManagerStrings {
   static const String city = 'city';
   static const String cityDot = 'city :';
   static const String email = 'Email';
+  static const String userDataSaved = 'user Data save done ';
+  static const String noDataFound = 'No Data found';
   static const String userName = 'User Name ';
   static const String save = 'save';
   static const String send = 'send';
@@ -20,7 +22,7 @@ class ManagerStrings {
   static const String password = 'Password';
   static const String forgetPassword = 'Forgot Password';
   static const String title = 'Title';
-  static const String total = 'Total';
+  static const String total = 'Total:';
   static const String home = 'Home';
   static const String signIn = 'Sign in';
   static const String vegetables = 'Vegetables';
@@ -34,7 +36,7 @@ class ManagerStrings {
   static const String changePassword = 'Change Password';
   static const String changeCountry = 'Change Country';
   static const String aboutUs = 'About us';
-  static const String contactUse = 'Contact us';
+  static const String contactUs = 'Contact us';
   static const String shareApp = 'Share App';
   static const String faq = 'FAQ';
   static const String termsOfUser = 'Terms of use';
@@ -46,6 +48,8 @@ class ManagerStrings {
       'Thank You For Registering With\n The Express Application';
   static const String editProfile = 'Edit profile';
   static const String addToCart = 'Add To Cart ';
+  static const String countInCart = 'Count In Cart ';
+  static const String creatingAccount = 'Creating Account Loading';
   static const String openOrder = 'Open Order';
   static const String completedOrder = 'Completed Order';
   static const String orderId = 'Order ID:';
@@ -61,7 +65,18 @@ class ManagerStrings {
   static const String doNotHaveAccount = "don't have an account";
   static const String termsAndPrivacy =
       "you agree to the Terms& Privacy Policy ";
-  static const String signUp = " sing up";
+  static const String signUp = "sing up";
+  static const String signupFailed = "sign up Failed";
+  static const String emailCantBeEmpty = "email cant be empty";
+  static const String dataCantBeEmpty = "Fields can't be empty";
+  static const String passwordCantBeEmpty = "password cant be empty";
+  static const String shortPassword = "Too short Password";
+  static const String invalidPassword = "Invalid Password";
+  static const String invalidEmail = "Invalid Email";
+  static const String invalidMobileNumber = "Invalid Mobile Number";
+  static const String mismatchedPassword = "mismatchedPassword";
+  static const String signUpDone = "account has been created successfully";
+  static const String signInDone = "login successfully";
   static const String termsAndConditions = " Terms and conditions";
 
   static const String outBoardingTitle1 = 'Find your cozy working space 1';
@@ -74,4 +89,6 @@ class ManagerStrings {
   static const String outBoardingSubTitle3 =
       'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 3.';
   static const String getStartButton = 'Let\'s get started';
+  static const String en = 'en';
+  static const String ar = 'ar';
 }

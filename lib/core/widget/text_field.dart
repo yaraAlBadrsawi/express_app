@@ -7,7 +7,10 @@ class TextFieldWidget extends StatelessWidget {
   final String hintText;
   final double padding;
   final IconData icon;
-  const TextFieldWidget(this.hintText, this.padding, this.icon, {Key? key})
+  final TextEditingController controller;
+
+  const TextFieldWidget(this.controller, this.hintText, this.padding, this.icon,
+      {Key? key})
       : super(key: key);
 
   @override
@@ -15,11 +18,11 @@ class TextFieldWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: padding),
       child: TextField(
-        controller: TextEditingController(),
+        controller: controller,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(ManagerWidth.w0),
           hintText: hintText,
-          hintStyle: TextStyle(color: ManagerColor.grey),
+          hintStyle: const TextStyle(color: ManagerColor.grey),
           prefixIcon: Icon(
             icon,
             color: ManagerColor.oliveDrab,

@@ -15,7 +15,10 @@ class _TermsScreenState extends State<TermsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(ManagerStrings.termsAndConditions),
+      appBar: CustomAppBar(
+          ManagerStrings.termsAndConditions, Icons.arrow_back_ios, () {
+        Navigator.pop(context);
+      }),
       body: Column(children: [
         Text(ManagerStrings.termsAndConditions,
             style: TextStyle(

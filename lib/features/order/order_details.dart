@@ -18,7 +18,10 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(ManagerStrings.orderDetails),
+      appBar:
+          CustomAppBar(ManagerStrings.orderDetails, Icons.arrow_back_ios, () {
+        Navigator.pop(context);
+      }),
       body: Container(
           decoration: const BoxDecoration(
               image:

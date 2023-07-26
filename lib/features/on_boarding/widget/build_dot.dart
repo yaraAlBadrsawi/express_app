@@ -1,3 +1,4 @@
+import 'package:express_app/core/resources/manager_color.dart';
 import 'package:flutter/material.dart';
 
 class BuildDot extends StatelessWidget {
@@ -9,12 +10,12 @@ class BuildDot extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 10,
-      width: 25,
+      width: 20,
       // width: currentIndex == index ? 25 : 10,
       margin: EdgeInsets.only(right: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: Theme.of(context).primaryColor,
+        color: ManagerColor.oliveDrabDark,
       ),
     );
   }

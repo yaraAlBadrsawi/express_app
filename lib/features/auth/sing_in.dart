@@ -1,28 +1,20 @@
 import 'dart:ui';
-import 'dart:ui';
-
-import 'package:express_app/config/constants.dart';
 import 'package:express_app/core/resources/manager_assets.dart';
 import 'package:express_app/core/resources/manager_color.dart';
 import 'package:express_app/core/resources/manager_sizes.dart';
 import 'package:express_app/core/resources/manager_strings.dart';
 import 'package:express_app/core/widget/main_button.dart';
 import 'package:express_app/core/widget/text_field.dart';
-import 'package:express_app/features/auth/sing_in.dart';
 import 'package:express_app/features/auth/widget/auth_box.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../../core/resources/manager_fonts.dart';
+import '../../core/widget/dialog_util.dart';
 import '../../routes/routes.dart';
+import 'controller/sign_in_controller.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({Key? key}) : super(key: key);
-
-  @override
-  State<SignInScreen> createState() => _SignInScreenState();
-}
-
-class _SignInScreenState extends State<SignInScreen> {
+class SignInScreen extends GetView<SignInController> {
+  const SignInScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,12 +29,12 @@ class _SignInScreenState extends State<SignInScreen> {
             SizedBox(
               height: ManagerHeight.h45,
             ),
-            TextFieldWidget(
-                ManagerStrings.email, ManagerWidth.w27, Icons.email),
+            TextFieldWidget(controller.emailController, ManagerStrings.email,
+                ManagerWidth.w27, Icons.email),
             SizedBox(
               height: ManagerHeight.h20,
             ),
-            TextFieldWidget(
+            TextFieldWidget(controller.passwordController,
                 ManagerStrings.password, ManagerWidth.w27, Icons.key),
             Align(
               alignment: Alignment.bottomRight,
@@ -62,11 +54,17 @@ class _SignInScreenState extends State<SignInScreen> {
             MainButton(
               ManagerStrings.signIn,
               ManagerWidth.w150,
-              () {},
+              () {
+                // controller.isLoading(true);
+                // DialogUtils.showLoadingDialog(context);
+                controller
+                    .performLogin(); // no controller for password repeater
+                controller.isLoading(false);
+              },
               radius: ManagerRadius.r23,
             ),
             SizedBox(
-              height: 15,
+              height: ManagerHeight.h15,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -82,8 +80,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   style: TextButton.styleFrom(
                       foregroundColor: ManagerColor.oliveDrab),
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, Routes.signUpView);
-                    // Navigator.pushReplacementNamed(context, Routes.signUpView);
+                    Get.toNamed(Routes.signUpView);
                   },
                   child: Text(
                     ManagerStrings.signUp,

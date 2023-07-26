@@ -25,9 +25,9 @@ class _OrderScreenState extends State<OrderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
-        ManagerStrings.myOrder,
-      ),
+      appBar: CustomAppBar(ManagerStrings.myOrder, Icons.arrow_back_ios, () {
+        Navigator.pop(context);
+      }),
       body: Container(
         decoration: const BoxDecoration(
             image:
@@ -103,7 +103,7 @@ class _OrderScreenState extends State<OrderScreen> {
                     itemCount: 10,
                     itemBuilder: (context, index) {
                       if (ManagerStrings.openOrder == _tabs![current]) {
-                        return const orderItem('125896', '12/5/2019', '100\$',
+                        return const OrderItem('125896', '12/5/2019', '100\$',
                             Icons.directions_bus_outlined);
                       } else {
                         return Text(ManagerStrings.completedOrder);
@@ -116,13 +116,13 @@ class _OrderScreenState extends State<OrderScreen> {
   }
 }
 
-class orderItem extends StatelessWidget {
+class OrderItem extends StatelessWidget {
   final String orderId;
   final String date;
   final String total;
   final IconData icon;
 
-  const orderItem(
+  const OrderItem(
     this.orderId,
     this.date,
     this.total,

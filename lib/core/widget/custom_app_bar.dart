@@ -7,19 +7,30 @@ import '../resources/manager_fonts.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final Function() action;
+  final IconData? icon;
+  final bool isCart;
+  final double? total;
 
-  const CustomAppBar(this.title, {Key? key}) : super(key: key);
+  // final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
+  const CustomAppBar(this.title, this.icon, this.action,
+      {this.isCart = false, this.total, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       centerTitle: true,
       leading: TextButton(
-          style: TextButton.styleFrom(foregroundColor: ManagerColor.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Icon(Icons.arrow_back_ios)),
+        style: TextButton.styleFrom(foregroundColor: ManagerColor.white),
+        onPressed: action,
+        child: Icon(icon),
+      ),
+      actions: [
+        Center(
+            child:
+                Text(isCart ? '${ManagerStrings.total} $total \$      ' : '')),
+      ],
       elevation: 0,
       backgroundColor: ManagerColor.transparent,
       flexibleSpace: Container(
@@ -27,7 +38,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(ManagerRadius.r15),
               bottomRight: Radius.circular(ManagerRadius.r15)),
-          gradient: LinearGradient(colors: [
+          gradient: const LinearGradient(colors: [
             ManagerColor.oliveDrab,
             ManagerColor.oliveDrabDark,
           ]),
@@ -42,5 +53,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

@@ -2,21 +2,19 @@ import 'package:express_app/core/resources/manager_color.dart';
 import 'package:express_app/core/resources/manager_fonts.dart';
 import 'package:express_app/core/resources/manager_strings.dart';
 import 'package:express_app/core/widget/main_button.dart';
-import 'package:express_app/core/widget/text_field.dart';
 import 'package:express_app/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/get_state_manager/src/simple/get_view.dart';
 
-import '../../core/resources/manager_assets.dart';
-import '../../core/resources/manager_sizes.dart';
+import '../../../core/resources/manager_assets.dart';
+import '../../../core/resources/manager_sizes.dart';
+import '../controller/profile_controller.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+class ProfileScreen extends GetView<ProfileController> {
+  ProfileScreen({super.key});
 
-  @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             children: [
               Container(
                 height: ManagerHeight.h244,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
                           ManagerAssets.path_20529,
@@ -66,18 +64,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
               )
             ],
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: ManagerHeight.h25),
-            child: Text(
-              'yara sameer',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: ManagerColor.oliveDrab,
-                  fontSize: ManagerIconSize.s24),
+          Obx(
+            () => Padding(
+              padding: EdgeInsets.symmetric(vertical: ManagerHeight.h25),
+              child: controller.name.value.isEmpty
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                      color: ManagerColor.oliveDrab,
+                    ))
+                  : Text(
+                      controller.name.value,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: ManagerColor.oliveDrab,
+                          fontSize: ManagerIconSize.s24),
+                    ),
             ),
           ),
-          const PersonalInformation(ManagerStrings.email, 'test@mail.com'),
-          const PersonalInformation(ManagerStrings.phone, '121111111'),
+          PersonalInformation(ManagerStrings.email.tr, controller.email.value),
+          PersonalInformation(ManagerStrings.phone.tr, controller.mobile.value),
           SizedBox(
             height: ManagerHeight.h80,
           ),
@@ -87,7 +92,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             height: ManagerHeight.h40,
             fontSize: ManagerFontSize.s16,
             () {
-              Navigator.pushReplacementNamed(context, Routes.editProfileView);
+              print('language ');
+              Get.toNamed(Routes.editProfileView);
             },
           )
         ],
@@ -96,7 +102,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
-class PersonalInformation extends StatelessWidget {
+class PersonalInformation extends GetView<ProfileController> {
   final String title;
   final String data;
 
@@ -126,7 +132,7 @@ class PersonalInformation extends StatelessWidget {
                 width: ManagerWidth.w20,
               ),
               Text(
-                title,
+                title.tr,
                 style: TextStyle(
                     fontSize: ManagerFontSize.s14,
                     fontWeight: FontWeight.bold,
@@ -134,11 +140,16 @@ class PersonalInformation extends StatelessWidget {
               ),
             ],
           ),
-          Text(
-            data,
-            style: TextStyle(
-                fontSize: ManagerFontSize.s16, color: ManagerColor.grey),
-          ),
+          data.isEmpty
+              ? const Center(
+                  child: CircularProgressIndicator(
+                  color: ManagerColor.oliveDrab,
+                ))
+              : Text(
+                  data.tr,
+                  style: TextStyle(
+                      fontSize: ManagerFontSize.s16, color: ManagerColor.grey),
+                ),
         ],
       ),
     );

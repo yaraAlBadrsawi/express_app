@@ -3,18 +3,31 @@ import 'package:flutter/material.dart';
 
 import '../../../core/resources/manager_fonts.dart';
 import '../../../core/resources/manager_sizes.dart';
+import '../../../core/resources/manager_strings.dart';
 
 class DrawerItem extends StatelessWidget {
-  final String title;
+  String title;
   final IconData icon;
   final Function() onTap;
+  final Widget widget;
 
-  const DrawerItem(
+  DrawerItem(
     this.title,
     this.icon,
     this.onTap, {
+    this.widget = const Icon(Icons.arrow_forward_ios),
     super.key,
   });
+
+  // List of items in our dropdown menu
+  var items = [
+    'It',
+    'It',
+    'It',
+    'It',
+    'It',
+  ];
+  String dropdownvalue = 'It';
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +50,10 @@ class DrawerItem extends StatelessWidget {
                 style: TextStyle(
                   fontSize: ManagerFontSize.s16,
                 ),
-              )
+              ),
             ],
           ),
-          Icon(Icons.arrow_forward_ios)
+          widget
         ],
       ),
     );
